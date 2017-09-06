@@ -1,0 +1,1 @@
+https://github.com/underscoreio/shapeless-guide
