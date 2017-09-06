@@ -6,11 +6,25 @@ import com.ikempf.typeclassderivation.Shape.{Circle, Rectangle}
 
 class TypeClassDerivationTest extends FlatSpec with Matchers {
 
-  "Derivation" should "derive generic encoders" in {
+  "Product derivation" should "derive generic encoders" in {
     CsvEncoder[IceCream].encode(IceCream("vanilla", 2, true)) should equal(List("vanilla", "2", "true"))
     CsvEncoder[Employee].encode(Employee("employee", 13, false)) should equal(List("employee", "13", "false"))
     CsvEncoder[Rectangle].encode(Rectangle(15.0d, 13.3d)) should equal(List("15.0", "13.3"))
     CsvEncoder[Circle].encode(Circle(3.14d)) should equal(List("3.14"))
+  }
+
+  "CoProduct derivation" should "derive generic encorders" in {
+    // Given
+    val shapes: List[Shape] = List(
+      Rectangle(3.0, 4.0),
+      Circle(1.0)
+    )
+
+    // When
+    val csvLines = shapes.map(CsvEncoder[Shape].encode)
+
+    // Then
+    csvLines should equal(List(List("3.0", "4.0"), List("1.0")))
   }
 
 }
