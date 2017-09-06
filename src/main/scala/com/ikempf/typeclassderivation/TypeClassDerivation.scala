@@ -2,7 +2,7 @@ package com.ikempf.typeclassderivation
 import java.lang
 
 import com.ikempf.typeclassderivation.CsvEncoder.create
-import shapeless.{:+:, ::, CNil, Coproduct, Generic, HList, HNil, Inl, Inr}
+import shapeless.{:+:, ::, CNil, Coproduct, Generic, HList, HNil, Inl, Inr, Lazy}
 import cats.instances.list._
 import cats.syntax.applicative._
 
@@ -20,7 +20,6 @@ object TypeClassDerivation {
         hEncoder.encode(h) ++ tEncoder.encode(t)
     }
 
-
   implicit val cnilEncoder: CsvEncoder[CNil] = create(_ => ???)
   implicit def coproductEncoder[H, T <: Coproduct](implicit hEncoder: CsvEncoder[H], tEncoder: CsvEncoder[T]): CsvEncoder[H :+: T] =
     create {
@@ -30,7 +29,7 @@ object TypeClassDerivation {
         tEncoder.encode(t)
     }
 
-  implicit def genericEncoder[A, R](implicit gen: Generic.Aux[A, R], encoder: CsvEncoder[R]) : CsvEncoder[A] =
-    create(a => encoder.encode(gen.to(a)))
+  implicit def genericEncoder[A, R](implicit gen: Generic.Aux[A, R], encoder: Lazy[CsvEncoder[R]]) : CsvEncoder[A] =
+    create(a => encoder.value.encode(gen.to(a)))
 
 }

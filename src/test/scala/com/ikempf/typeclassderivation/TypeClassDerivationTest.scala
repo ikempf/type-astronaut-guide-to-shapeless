@@ -3,6 +3,7 @@ package com.ikempf.typeclassderivation
 import org.scalatest.{FlatSpec, Matchers}
 import TypeClassDerivation._
 import com.ikempf.typeclassderivation.Shape.{Circle, Rectangle}
+import com.ikempf.typeclassderivation.Tree.{Branch, Leaf}
 
 class TypeClassDerivationTest extends FlatSpec with Matchers {
 
@@ -13,7 +14,7 @@ class TypeClassDerivationTest extends FlatSpec with Matchers {
     CsvEncoder[Circle].encode(Circle(3.14d)) should equal(List("3.14"))
   }
 
-  "CoProduct derivation" should "derive generic encorders" in {
+  "Coproduct derivation" should "derive generic encorders" in {
     // Given
     val shapes: List[Shape] = List(
       Rectangle(3.0, 4.0),
@@ -25,6 +26,17 @@ class TypeClassDerivationTest extends FlatSpec with Matchers {
 
     // Then
     csvLines should equal(List(List("3.0", "4.0"), List("1.0")))
+  }
+
+  "Recursive derivation" should "derive generic encoders" in {
+    // Given
+    val tree = Branch(Leaf(5), Leaf(3))
+
+    // When
+    val line = CsvEncoder[Tree[Int]].encode(tree)
+
+    // Then
+    line should equal(List("5", "3"))
   }
 
 }
