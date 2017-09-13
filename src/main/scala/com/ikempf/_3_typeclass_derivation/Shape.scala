@@ -1,4 +1,4 @@
-package com.ikempf.typeclassderivation
+package com.ikempf._3_typeclass_derivation
 
 sealed trait Shape
 

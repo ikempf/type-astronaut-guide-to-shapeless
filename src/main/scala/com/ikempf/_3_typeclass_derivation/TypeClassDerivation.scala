@@ -1,7 +1,7 @@
-package com.ikempf.typeclassderivation
+package com.ikempf._3_typeclass_derivation
 import java.lang
 
-import com.ikempf.typeclassderivation.CsvEncoder.create
+import com.ikempf._3_typeclass_derivation.CsvEncoder.create
 import shapeless.{:+:, ::, CNil, Coproduct, Generic, HList, HNil, Inl, Inr, Lazy}
 import cats.instances.list._
 import cats.syntax.applicative._

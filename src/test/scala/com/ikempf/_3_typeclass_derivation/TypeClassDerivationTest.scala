@@ -1,9 +1,9 @@
-package com.ikempf.typeclassderivation
+package com.ikempf._3_typeclass_derivation
 
 import org.scalatest.{FlatSpec, Matchers}
 import TypeClassDerivation._
-import com.ikempf.typeclassderivation.Shape.{Circle, Rectangle}
-import com.ikempf.typeclassderivation.Tree.{Branch, Leaf}
+import com.ikempf._3_typeclass_derivation.Shape.{Circle, Rectangle}
+import com.ikempf._3_typeclass_derivation.Tree.{Branch, Leaf}
 
 class TypeClassDerivationTest extends FlatSpec with Matchers {
 
