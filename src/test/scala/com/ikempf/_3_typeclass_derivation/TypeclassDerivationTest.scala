@@ -1,11 +1,11 @@
 package com.ikempf._3_typeclass_derivation
 
 import org.scalatest.{FlatSpec, Matchers}
-import TypeClassDerivation._
+import TypeclassDerivation._
 import com.ikempf._3_typeclass_derivation.Shape.{Circle, Rectangle}
 import com.ikempf._3_typeclass_derivation.Tree.{Branch, Leaf}
 
-class TypeClassDerivationTest extends FlatSpec with Matchers {
+class TypeclassDerivationTest extends FlatSpec with Matchers {
 
   "Product derivation" should "derive generic encoders" in {
     CsvEncoder[IceCream].encode(IceCream("vanilla", 2, true)) should equal(List("vanilla", "2", "true"))

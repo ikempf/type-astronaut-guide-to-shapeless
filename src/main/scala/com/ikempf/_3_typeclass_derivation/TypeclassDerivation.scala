@@ -1,4 +1,5 @@
 package com.ikempf._3_typeclass_derivation
+
 import java.lang
 
 import com.ikempf._3_typeclass_derivation.CsvEncoder.create
@@ -6,7 +7,7 @@ import shapeless.{:+:, ::, CNil, Coproduct, Generic, HList, HNil, Inl, Inr, Lazy
 import cats.instances.list._
 import cats.syntax.applicative._
 
-object TypeClassDerivation {
+object TypeclassDerivation {
 
   implicit val stringEncoder = create[String](_.pure[List])
   implicit val intEncoder = create[Int](Integer.toString(_).pure[List])
