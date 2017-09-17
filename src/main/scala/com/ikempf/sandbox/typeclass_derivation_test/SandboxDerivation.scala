@@ -30,8 +30,8 @@ object SandboxDerivation {
     }
 
   implicit def productEncoder[H: JsonEncoder, T <: HList : JsonObjectEncoder]: JsonObjectEncoder[H :: T] =
-    new JsonObjectEncoder[::[H, T]] {
-      override def encode(value: ::[H, T]) = {
+    new JsonObjectEncoder[H :: T] {
+      override def encode(value: H :: T): JsonObject = {
         value match {
           case h :: t =>
             val namedHead = "todo" -> JsonEncoder[H].encode(h)

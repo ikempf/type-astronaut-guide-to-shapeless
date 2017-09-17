@@ -1,13 +1,12 @@
-package com.ikempf.sandbox.typeclass_derivation_test
+package com.ikempf._5_labelled_typeclass_derivation
 
 import com.ikempf._3_typeclass_derivation.{IceCream, Shape}
-import com.ikempf._3_typeclass_derivation.Shape.{Circle, Rectangle}
-import com.ikempf.sandbox.typeclass_derivation_test.JsonValue.{JsonArray, JsonBoolean, JsonNumber, JsonObject, JsonString}
-import com.ikempf.sandbox.typeclass_derivation_test.SandboxDerivation._
 import org.scalatest.{FlatSpec, Matchers}
-import shapeless.{:+:, CNil, Generic, HNil}
+import LabelledTypeclassDerivation._
+import com.ikempf._3_typeclass_derivation.Shape.{Circle, Rectangle}
+import com.ikempf._5_labelled_typeclass_derivation.JsonValue.{JsonArray, JsonBoolean, JsonNumber, JsonObject, JsonString}
 
-class SandboxDerivationTest extends FlatSpec with Matchers {
+class LabelledTypeclassDerivationTest extends FlatSpec with Matchers {
 
   "ProductEncoder" should "derive JsonEncoder typeclasses" in {
     // Given
@@ -18,9 +17,9 @@ class SandboxDerivationTest extends FlatSpec with Matchers {
 
     // Then
     jsonValue should equal(JsonObject(List(
-      "todo" -> JsonString("vanilla"),
-      "todo" -> JsonNumber(2),
-      "todo" -> JsonBoolean(false)
+      "name" -> JsonString("vanilla"),
+      "numCherries" -> JsonNumber(2),
+      "inCone" -> JsonBoolean(false)
     )))
   }
 
@@ -36,8 +35,8 @@ class SandboxDerivationTest extends FlatSpec with Matchers {
 
     // Then
     json should equal(JsonArray(List(
-      JsonObject(List("todo" -> JsonNumber(3), "todo" -> JsonNumber(4))),
-      JsonObject(List("todo" -> JsonNumber(1))),
+      JsonObject(List("width" -> JsonNumber(3), "height" -> JsonNumber(4))),
+      JsonObject(List("radius" -> JsonNumber(1))),
     )))
   }
 
